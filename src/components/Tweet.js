@@ -3,6 +3,7 @@ import {db,storage } from 'fbase';
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { ref,deleteObject } from "firebase/storage";
 import { async } from '@firebase/util';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Tweet({tweetObj,isOwner}) {
     const [editing, setEditing] = useState(false);
@@ -39,14 +40,14 @@ function Tweet({tweetObj,isOwner}) {
         setEditing(false);
     }
   return (
-    <div>
+    <div className="tweet">
         {editing ? (
             <>
-                <form onSubmit={onSubmit}>
-                    <input onChange={onChange} value={newTweet} required />
-                    <input type="submit" value="Update Tweet" />
+                <form onSubmit={onSubmit} className="container tweetEdit">
+                    <input onChange={onChange} value={newTweet} required className="formInput"/>
+                    <input type="submit" value="Update Tweet" className="formBtn"/>
                 </form>
-                <button onClick={toggleEditing}>Cancel</button>
+                <button onClick={toggleEditing} className="formBtn cancelBtn">Cancel</button>
             </>
         ) : (
             <>
@@ -55,11 +56,15 @@ function Tweet({tweetObj,isOwner}) {
                     <img src={tweetObj.attachmentUrl} width="50" height="50" />
                 )}
                 {isOwner && (
-                    <>
+                     <div className="tweet__actions">
                         
-                        <button onClick={onDeleteClick}>Delete Tweet</button>
-                        <button onClick={toggleEditing}>Edit Tweet</button>
-                    </>
+                        <span onClick={onDeleteClick}>
+                            <FontAwesomeIcon icon="fa-solid fa-trash" />
+                        </span>
+                        <span onClick={toggleEditing}>
+                            <FontAwesomeIcon icon="fa-solid fa-pencil" />
+                        </span>
+                     </div>
                     
                 )}
             </>

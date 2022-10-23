@@ -1,6 +1,10 @@
 import Router, {useEffect, useState} from "react"
 import AppRouter from "components/Router";
 import { authService } from "fbase";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { faTwitter, faGoogle ,faGithub} from '@fortawesome/free-brands-svg-icons'
+library.add(fas, faTwitter, faGoogle,faGithub)
 
 function App() {
   const [init, setInit] = useState(false);

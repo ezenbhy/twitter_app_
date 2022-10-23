@@ -1,6 +1,6 @@
 import React , {useEffect, useState} from 'react';
 import {db,storage} from "fbase";
-import { collection, addDoc, doc, getDocs , query,onSnapshot} from "firebase/firestore";
+import { collection, addDoc, doc, getDocs , query,onSnapshot,orderBy} from "firebase/firestore";
 import {  ref ,uploadString, getDownloadURL } from "firebase/storage";
 import Tweet from 'components/Tweet';
 import TweetFactory from 'components/TweetFactory';
@@ -27,7 +27,7 @@ function Home({userObj}) {
 */
   useEffect(() => {
    // getTweets();
-    const q = query(collection(db, "tweets"));
+    const q = query(collection(db, "tweets"), orderBy("createdAt", "desc"));
     const unsubscribe =  onSnapshot(q, (querySnapshot) => {
       const newArray =  [];
       querySnapshot.forEach((doc) => {
@@ -42,10 +42,10 @@ function Home({userObj}) {
   
 
   return (
-    <>
+    <div className="container" >
       <TweetFactory  userObj={userObj}/>
       
-      <div>
+      <div  style={{ marginTop: 30 }}>
         {tweets.map(tweet => (
           // <div key={tweet.id}>
           //   <h4>{tweet.text}</h4>
@@ -56,7 +56,7 @@ function Home({userObj}) {
                  />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 
