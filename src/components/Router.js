@@ -9,7 +9,7 @@ import Navigation from './Navigation';
 function AppRouter({isLoggedIn, userObj/*, refresher*/}) {
   
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         {isLoggedIn && <Navigation userObj={userObj} />}
         <Routes>
             {/* <Route /> */}
